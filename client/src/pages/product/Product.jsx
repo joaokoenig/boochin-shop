@@ -3,18 +3,65 @@ import './Product.scss'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import BalanceIcon from '@mui/icons-material/Balance';
+import { useParams } from 'react-router-dom';
 
 
 
 const Product = () => {
-
+  const catId = parseInt(useParams().id)
   const [selectedImg, setSelectedImg] = useState(0);
   const [quantity, setQuantity] = useState(1);
+  const [tokenBurned, setTokenBurned] = useState(false);
 
   const images = [
     "https://images.pexels.com/photos/5886042/pexels-photo-5886042.jpeg?auto=compress&cs=tinysrgb&w=1600",
     "https://images.pexels.com/photos/5119526/pexels-photo-5119526.jpeg?auto=compress&cs=tinysrgb&w=1600"
   ]
+
+  function burnToken() {
+    //TODO implementar burn token
+    setTokenBurned(true);
+  }
+
+  function transferToken() {
+    //TODO implementar função que transfer token quando comprando (mint_with_barcode)
+    //exibir mensagem ou alerta, algo do tipo, informando
+    //usar barcode hardcoded
+  }
+
+  const makeBuyButton = () => {
+    if(catId === 2) {
+      //case tokens
+      return (
+        <button className='addButton' onClick={() => transferToken()}>
+          <AddShoppingCartIcon/> BUY NOW
+        </button>
+      )
+    }
+    //case exclusive collecion
+    return (
+        <div>
+        {(!tokenBurned) ?
+            <div>
+              <button className='addButton exclusiveCollectionDisabled'>
+                <AddShoppingCartIcon/> BUY NOW
+              </button>
+              <p>To be able to buy this item you should burn a single token</p>
+              <button className='addButton' onClick={() => burnToken()}>
+                BURN IT!
+              </button>
+            </div>
+            :
+            <div>
+              <button className='addButton'>
+                <AddShoppingCartIcon/> BUY NOW
+              </button>
+              <p>Token burned with success. Be happy!</p>
+            </div>
+        }
+        </div>
+    )
+  }
 
   return (
     <div className='product'>
@@ -36,9 +83,7 @@ const Product = () => {
           {quantity}
           <button onClick={()=>setQuantity(prev=>prev+1)}>+</button>
         </div>
-        <button className='addButton'>
-        <AddShoppingCartIcon/> BUY NOW
-        </button>
+        {makeBuyButton()}
         <div className="link">
           <div className="item">
             <FavoriteBorderIcon/> ADD TO WISHLIST

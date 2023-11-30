@@ -57,12 +57,18 @@
         .addButton{
             display: flex;
             align-items: center;
-            width: 130px;
+            width: 100px;
             border: none;
             background-color: #2879fe;
             color: white;
             padding: 5px;
             cursor: pointer;
+            border-radius: 5px;
+            justify-content: center;
+        }
+        .exclusiveCollectionDisabled{
+            cursor: default;
+            background-color: lightgray;
         }
 
         .link{

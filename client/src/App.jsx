@@ -10,6 +10,7 @@ import Navbar from "./components/navbar/Navbar";
 import Footer from "./components/footer/Footer";
 import "./App.scss"
 import React from "react";
+import Cashback from "./components/cashback/Cashback.jsx";
 
 
 const Layout = () =>{
@@ -38,6 +39,15 @@ const router = createBrowserRouter([
       {
         path: "/product/:id",
         element: <Product/>
+      },
+      {
+        path: "/transfer",
+        element: <Product/>
+        //TODO alterar para component transfer
+      },
+      {
+        path: "/cashback",
+        element: <Cashback/>
       }
     ]
   },
